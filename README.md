@@ -8,5 +8,7 @@ LAN web interface discovery dashboard.
 - Simple dashboard
 
 ## Run
+```bash
 docker build -t lantern .
 docker run -p 8000:8000 lantern
+```
