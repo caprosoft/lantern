@@ -10,20 +10,40 @@
 
 <script>
 async function scan() {
-  const res = await fetch('/scan');
-  const data = await res.json();
-
   const list = document.getElementById('list');
-  list.innerHTML = "";
 
-  data.forEach(d => {
-    d.ports.forEach(p => {
-      const url = `http://${d.ip}:${p}`;
-      const li = document.createElement('li');
-      li.innerHTML = `<a href="${url}" target="_blank">${url}</a>`;
-      list.appendChild(li);
+  // 🔄 loading
+  list.innerHTML = "<li>🔄 Scansione in corso...</li>";
+
+  try {
+    const res = await fetch('/scan');
+    const data = await res.json();
+
+    list.innerHTML = "";
+
+    if (!data.length) {
+      list.innerHTML = "<li>Nessun dispositivo trovato</li>";
+      return;
+    }
+
+    data.forEach(d => {
+      d.services.forEach(s => {
+        const url = `http://${d.ip}:${s.port}`;
+        const li = document.createElement('li');
+
+        li.innerHTML = `
+          <a href="${url}" target="_blank">
+            ${url}
+          </a> ${s.title ? "- " + s.title : ""}
+        `;
+
+        list.appendChild(li);
+      });
     });
-  });
+
+  } catch (err) {
+    list.innerHTML = "<li>❌ Errore durante lo scan</li>";
+  }
 }
 </script>
 </body>
