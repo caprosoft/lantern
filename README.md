@@ -1,8 +1,10 @@
 > 🚧 Work in progress! This project is currently in the alpha stage — some things may break, change, or disappear.
 
-# Lantern 🔦
+# Lantern
 
 LAN web interface discovery dashboard.
+
+![Screenshot](./assets/lantern.png)
 
 ## Features
 - Scan LAN
