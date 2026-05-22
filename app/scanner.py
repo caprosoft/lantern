@@ -5,7 +5,10 @@ import asyncio
 COMMON_PORTS = [80, 443, 8080, 8443, 631]
 
 def scan_network(subnet="192.168.1.0/24"):
-    nm = nmap.PortScanner()
+    try:
+        nm = nmap.PortScanner()
+    except nmap.PortScannerError:
+        return {"error": "nmap not installed or not in PATH"}
     ports = ",".join(map(str, COMMON_PORTS))
 
     nm.scan(hosts=subnet, arguments=f"-p {ports} --open")
