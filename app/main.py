@@ -9,7 +9,8 @@ def root():
     return {"status": "ok"}
 
 @app.get("/scan")
-def scan():
-    return scan_network()
+async def scan():
+    devices = scan_network()
+    return await enrich_devices(devices)
 
 app.mount("/", StaticFiles(directory="app/static", html=True), name="static")
