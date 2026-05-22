@@ -13,7 +13,7 @@ async function scan() {
   const list = document.getElementById('list');
 
   // 🔄 loading
-  list.innerHTML = "<li>🔄 Scansione in corso...</li>";
+  list.innerHTML = "<li>🔄 Scanning network...</li>";
 
   try {
     const res = await fetch('/scan');
@@ -22,7 +22,7 @@ async function scan() {
     list.innerHTML = "";
 
     if (!data.length) {
-      list.innerHTML = "<li>Nessun dispositivo trovato</li>";
+      list.innerHTML = "<li>No devices found</li>";
       return;
     }
 
@@ -42,7 +42,7 @@ async function scan() {
     });
 
   } catch (err) {
-    list.innerHTML = "<li>❌ Errore durante lo scan</li>";
+    list.innerHTML = "<li>❌ Scan failed</li>";
   }
 }
 </script>
