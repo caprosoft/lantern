@@ -2,7 +2,11 @@
 
 LAN web interface discovery dashboard.
 
-## Features (planned)
+## Features
 - Scan LAN
 - Detect web interfaces
 - Simple dashboard
+
+## Run
+docker build -t lantern .
+docker run -p 8000:8000 lantern
