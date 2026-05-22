@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from scanner import scan_network
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
@@ -10,3 +11,5 @@ def root():
 @app.get("/scan")
 def scan():
     return scan_network()
+
+app.mount("/", StaticFiles(directory="app/static", html=True), name="static")

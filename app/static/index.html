@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lantern</title>
+</head>
+<body>
+  <h1>Lantern 🔦</h1>
+  <button onclick="scan()">Scan</button>
+  <ul id="list"></ul>
+
+<script>
+async function scan() {
+  const res = await fetch('/scan');
+  const data = await res.json();
+
+  const list = document.getElementById('list');
+  list.innerHTML = "";
+
+  data.forEach(d => {
+    d.ports.forEach(p => {
+      const url = `http://${d.ip}:${p}`;
+      const li = document.createElement('li');
+      li.innerHTML = `<a href="${url}" target="_blank">${url}</a>`;
+      list.appendChild(li);
+    });
+  });
+}
+</script>
+</body>
+</html>
